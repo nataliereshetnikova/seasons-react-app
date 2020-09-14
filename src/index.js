@@ -21,18 +21,28 @@ class App extends Component {
   componentDidUpdate() {
     console.log("component updated");
   }
-  render() {
+  renderContent(){
     if (this.state.lat && this.state.errorMessage === "") {
       return (
-      <div>
-          <SeasonDisplay lat={this.state.lat}/>
-      </div>
-        );
+        <div>
+          <SeasonDisplay lat={this.state.lat} />
+        </div>
+      );
     } else if (!this.state.lat && this.state.errorMessage !== "") {
       return <div>Error: {this.state.errorMessage} </div>;
     } else {
-      return <div>Loading...</div>;
+      return (
+        <div className='ui active dimmer'>
+          <div className="ui big text loader">Please accept the location request</div>
+        </div>
+      );
     }
+  }
+  render() {
+    return (
+      <div>
+        {this.renderContent()}
+      </div>);
   }
 }
 
